@@ -1,4 +1,4 @@
-const tableBody = document.getElementById('.tableBody');
+let tableBody = document.getElementById('tableBody');
 
   //criar a div que terá o mapa
   const divMap = document.querySelector('div');
@@ -11,8 +11,7 @@ let usersData = [];
 fetch('https://jsonplaceholder.typicode.com/users/')
   .then(response => response.json())
   .then(data => {
-    usersData = data;
-    renderTableRows();
+    renderTableRows(data);
   });
 
 filterInputName.addEventListener('keyup', filterRows);
@@ -22,7 +21,7 @@ const renderTableRows = (data) => {
   let tableRows = '';
 
   data.forEach(user => {
-    user['fullAdress'] = `${user.adress.street}, ${user.addres.suite} - ${user.adress.city} | ${user.address.suite}, ZIP: ${user.address.zipcode}  `
+    user['fullAddress'] = `${user.address.street}, ${user.address.suite} - ${user.address.city} | ${user.address.suite}, ZIP: ${user.address.zipcode}  `
     //console.log(user)
   });
 
@@ -49,7 +48,7 @@ const renderTableRows = (data) => {
     `;
   });
 
-  tableBody = tableRows;
+  tableBody.innerHTML = tableRows;
 }
 
 function filterRows() {
